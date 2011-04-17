@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>index</title>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="js/json2.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="js/amplify.store.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/history.adapter.jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/history.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/history.html4.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				
+				// the problem:
+				// clicking #one gets me to /#./one
+				// then clicking two gets me to /#one/two
+				// I'd love to have /#/one and /#/one/two (consistent look, encapsulated hash/hashbang)
+				
+				$("#one").click(function(e){
+					History.pushState(null,null,'/one');
+					return false;
+				});
+				
+				$("#two").click(function(e){
+					var newurl = History.getState().hash+"/two";
+					//newurl = newurl.replace(".",""); // remove dot?
+					console.log(newurl);
+					History.pushState(null, null, newurl);
+					return false;
+				});
+				
+			});
+			
+		</script>
+		
+	</head>
+	<body id="index" onload="">
+		<a id="one" href="/one">one</a>
+		<a id="two" href="/two">two</a>
+	</body>        
+</html>
